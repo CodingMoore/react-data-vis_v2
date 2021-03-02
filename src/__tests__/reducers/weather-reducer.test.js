@@ -39,14 +39,14 @@ describe('weatherReducer', () => {
   });
 
   test('successfully getting weather data should change isLoading to false and update weather data', () => {
-    const weatherData = "Weather data";
+    const weatherData = ["Weather data"];
     action = {
       type: c.GET_WEATHER_SUCCESS,
       weatherData
     };
     expect(weatherReducer(loadingState, action)).toEqual({
       isLoading: false,
-      weatherData: "Weather data",
+      weatherData: weatherData,
       error: null
     });
   });

@@ -9,10 +9,10 @@ describe("weather reducer actions", () => {
   });
 
   it("getWeatherSuccess should create GET_WEATHER_SUCCESS action", () => {
-    const weather = "Some weather";
+    const weather = ["Some weather"];
     expect(actions.getWeatherSuccess(weather)).toEqual({
       type: c.GET_WEATHER_SUCCESS,
-      weather
+      weatherData: weather
     });
   });
   it("getWeatherFailure should creat GET_WEATHER_FAILURE action", () => {

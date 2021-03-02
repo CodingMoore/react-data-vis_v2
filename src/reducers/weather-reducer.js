@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
     case c.GET_WEATHER_SUCCESS:
       return Object.assign({}, state, {
         isLoading: false,
-        weatherData: [],
+        weatherData: action.weatherData,
         error: null
       });
     case c.GET_WEATHER_FAILURE:
