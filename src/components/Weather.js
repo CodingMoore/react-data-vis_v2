@@ -13,8 +13,9 @@ class Weather extends React.Component {
   }
 
   render() {
-    { console.log(weatherData) }
+
     const { error, isLoading, weatherData } = this.props;
+    console.log(typeof (weatherData));
     if (error) {
       return <>Error: { error.message}</>
     } else if (isLoading) {
@@ -22,11 +23,13 @@ class Weather extends React.Component {
     } else {
       return (
         <>
+          { console.log(weatherData)}
           <h1>Weather Data</h1>
           <ul>
-            {weatherData["daily"][0]["temp"]["day"].map((weather, index) =>
+            {weatherData.map((weather, index) =>
               <li key={index}>
-                <p>{weather}</p>
+                {console.log(weather.temp.day)}
+                <p>{weather.temp}</p>
               </li>
             )}
           </ul>
@@ -36,6 +39,8 @@ class Weather extends React.Component {
     }
   }
 }
+
+// weatherData["daily"].map(object => object["temp"]["day"])
 
 const mapStateToProps = state => {
   return {
