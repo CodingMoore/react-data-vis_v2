@@ -21,7 +21,7 @@ export const makeApiCall = () => {
       .then(response => response.json())
       .then(
         (jsonifiedResponse) => {
-          dispatch(getWeatherSuccess(jsonifiedResponse.results));
+          dispatch(getWeatherSuccess(jsonifiedResponse.daily));
         })
       .catch((error) => {
         dispatch(getWeatherFailure(error));
