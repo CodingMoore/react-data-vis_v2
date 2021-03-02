@@ -29,7 +29,7 @@ class Weather extends React.Component {
             {weatherData.map((weather, index) =>
               <li key={index}>
                 {console.log(weather.temp.day)}
-                <p>{weather.temp}</p>
+                <p>{weather.temp.day}</p>
               </li>
             )}
           </ul>
