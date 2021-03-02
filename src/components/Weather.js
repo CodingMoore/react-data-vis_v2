@@ -4,9 +4,9 @@ import { makeApiCall } from './../actions/';
 import Graph from './Graph';
 
 class Weather extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -14,7 +14,7 @@ class Weather extends React.Component {
   }
 
   render() {
-    let displayGraph = null;
+    let displayGraph;
     const handleDateTimeConversion = (dt) => {
       const milliseconds = dt * 1000;
       const dateObject = new Date(milliseconds);
@@ -24,10 +24,9 @@ class Weather extends React.Component {
     const { error, isLoading, weatherData } = this.props;
     if (error) {
       return <>Error: { error.message}</>
-    } else if (isLoading) {
+    } else if (isLoading || !weatherData) {
       return <>Loading...</>
     } else {
-      displayGraph = <Graph weatherData={this.props.weatherData} />
       return (
         <>
           <h1>Weather Data</h1>
@@ -39,8 +38,9 @@ class Weather extends React.Component {
               </li>
             )}
           </ul>
-          {console.log("line 40 of Weather.js", weatherData)}
-          {displayGraph}
+          {weatherData.length > 0 && <Graph />}
+          {console.log("line 43 of Weather.js", weatherData)}
+          {/* <Graph weatherData = {this.props.weatherData} /> */}
         </>
       )
     }
