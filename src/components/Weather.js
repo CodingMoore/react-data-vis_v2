@@ -23,7 +23,6 @@ class Weather extends React.Component {
     } else {
       return (
         <>
-          { console.log(weatherData)}
           <h1>Weather Data</h1>
           <ul>
             {weatherData.map((weather, index) =>
