@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const MapContainer = () => {
-  const [currentPosition, setCurrentPosition, setSelected, selected] = useState({});
+  const [currentPosition, setCurrentPosition] = useState({});
   const mapStyles = {
     height: "50vh",
     width: "50%"
@@ -27,9 +27,9 @@ const MapContainer = () => {
       return currentPosition
     }
   }
-  const onSelect = item => {
-    setSelected(item);
-  }
+  // const onSelect = item => {
+  //   setSelected(item);
+  // }
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(success);
   })
