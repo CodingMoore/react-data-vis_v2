@@ -1,23 +1,57 @@
-import React from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import React, { useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const MapContainer = () => {
+  const [currentPosition, setCurrentPosition, setSelected, selected] = useState({});
   const mapStyles = {
     height: "50vh",
     width: "50%"
   };
-
-  const defaultCenter = {
-    lat: 45.5051, lng: -122.6750
+  const success = position => {
+    const currentPosition = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    }
+    setCurrentPosition(currentPosition);
   }
+  const onMarkerDragEnd = (e) => {
+    const lat = e.latLng.lat();
+    const lng = e.latLng.lng();
+    setCurrentPosition({ lat, lng })
+  }
+  function defaultCenter() {
+    console.log("currentPosition", currentPosition);
+    if (Object.keys(currentPosition).length === 0) {
+      return { lat: 45.5051, lng: -122.6750 };
+
+    } else {
+      return currentPosition
+
+    }
+  }
+  const onSelect = item => {
+    setSelected(item);
+  }
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(success);
+  })
+  console.log("defaultCenter", defaultCenter());
   return (
     <LoadScript
-      googleMapsApiKey = {process.env.REACT_APP_MAPS_API_KEY}>
+      googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}>
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={13}
-        center={defaultCenter}
-      />
+        center={defaultCenter()} >
+        {
+          currentPosition.lat ?
+            <Marker
+              position={currentPosition || defaultCenter()}
+              onDragEnd={(e) => onMarkerDragEnd(e)}
+              draggable={true} /> :
+            null
+        }
+      </GoogleMap>
     </LoadScript >
   )
 }

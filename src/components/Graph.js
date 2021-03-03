@@ -1,7 +1,6 @@
 import React from 'react';
 import CanvasJSReact from './../canvasjs.react';
 import { connect } from 'react-redux';
-import { makeApiCall } from './../actions';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
