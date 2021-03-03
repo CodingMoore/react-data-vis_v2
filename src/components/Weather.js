@@ -14,7 +14,6 @@ class Weather extends React.Component {
   }
 
   render() {
-    let displayGraph;
     const handleDateTimeConversion = (dt) => {
       const milliseconds = dt * 1000;
       const dateObject = new Date(milliseconds);
