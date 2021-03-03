@@ -1,22 +1,22 @@
-import React, { useSelector } from 'react';
+import React from 'react';
 import CanvasJSReact from './../canvasjs.react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { makeApiCall } from './../actions';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 class Graph extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   // const data = useSelector(state => state.weatherData);
   //layout of graph structure
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(makeApiCall());
-  }
-  render(){
+  // componentDidMount() {
+  //   const { dispatch } = this.props;
+  //   dispatch(makeApiCall());
+  // }
+  render() {
     const handleDateTimeConversion = (dt) => {
       const milliseconds = dt * 1000;
       const dateObject = new Date(milliseconds);
@@ -24,10 +24,15 @@ class Graph extends React.Component {
       return humanDateFormat;
     }
     // const weatherData = this.props;
-    const { error, isLoading, weatherData}  = this.props;
+    const { error, isLoading, weatherData } = this.props;
     const options = {
       title: {
         text: "Temperature in Freedom Units"
+      },
+      axisY: {
+        title: "Temp Fahrenheit",
+        minimum: -50,
+        maximum: 145,
       },
       data: [{
         type: "column",

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { makeApiCall } from './../actions/';
 import Graph from './Graph';
+import MapContainer from './Map';
 
 class Weather extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Weather extends React.Component {
     } else {
       return (
         <>
+          <MapContainer />
           <h1>Weather Data</h1>
           <ul>
             {weatherData.map((weather, index) =>
@@ -39,7 +41,6 @@ class Weather extends React.Component {
           </ul>
           {weatherData.length > 0 && <Graph />}
           {console.log("line 43 of Weather.js", weatherData)}
-          {/* <Graph weatherData = {this.props.weatherData} /> */}
         </>
       )
     }
