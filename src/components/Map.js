@@ -22,11 +22,9 @@ const MapContainer = () => {
   function defaultCenter() {
     console.log("currentPosition", currentPosition);
     if (Object.keys(currentPosition).length === 0) {
-      return { lat: 45.5051, lng: -122.6750 };
-
+      return setCurrentPosition({ lat: 45.5051, lng: -122.6750 });
     } else {
       return currentPosition
-
     }
   }
   const onSelect = item => {
@@ -46,7 +44,7 @@ const MapContainer = () => {
         {
           currentPosition.lat ?
             <Marker
-              position={currentPosition || defaultCenter()}
+              position={currentPosition}
               onDragEnd={(e) => onMarkerDragEnd(e)}
               draggable={true} /> :
             null
