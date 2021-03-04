@@ -10,9 +10,25 @@ class Weather extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(makeApiCall());
+    const { dispatch, coordinates } = this.props;
+    console.log("THIS IS THE STORE", this.props);
+    console.log(coordinates);
+    dispatch(makeApiCall(coordinates.lat, coordinates.lng));
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.props.prevProps != )
+  //   const { dispatch, coordinates } = this.props;
+  //   console.log("THIS IS THE STORE", this.props);
+  //   console.log(coordinates);
+  //   dispatch(makeApiCall(coordinates.lat, coordinates.lng));
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.data !== this.state.data) {
+  //     // Now fetch the new data here.
+  //   }
+  // }
+  
 
   render() {
     const handleDateTimeConversion = (dt) => {
@@ -40,7 +56,7 @@ class Weather extends React.Component {
             )}
           </ul>
           {weatherData.length > 0 && <Graph />}
-          {console.log("line 43 of Weather.js", weatherData)}
+          {console.log("line 43 of Weather.js", this.props)}
         </>
       )
     }
@@ -51,7 +67,8 @@ const mapStateToProps = state => {
   return {
     weatherData: state.weatherData,
     isLoading: state.isLoading,
-    error: state.error
+    error: state.error,
+    coordinates: state.coordinates,
   }
 }
 

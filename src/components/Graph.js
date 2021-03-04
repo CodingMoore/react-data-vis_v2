@@ -65,7 +65,8 @@ const mapStateToProps = state => {
   return {
     weatherData: state.weatherData,
     isLoading: state.isLoading,
-    error: state.error
+    error: state.error,
+    coordinates: state.coordinates
   }
 }
 

@@ -3,7 +3,8 @@ import * as c from './../actions/ActionTypes';
 let initialState = {
   isLoading: false,
   weatherData: [],
-  error: null
+  error: null,
+  coordinates: { lat: 45.5051, lng: -122.6750 }
 }
 
 export default (state = initialState, action) => {
@@ -22,6 +23,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isLoading: false,
         error: action.error
+      });
+    case c.ADD_COORDINATES:
+      return Object.assign({}, state, {
+        coordinates: action.coordinates
       });
     default:
       return state;

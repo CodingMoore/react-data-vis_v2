@@ -14,10 +14,15 @@ export const getWeatherFailure = (error) => ({
   error
 });
 
-export const makeApiCall = () => {
+export const addCoordinates = (coordinates) => ({
+  type: c.ADD_COORDINATES,
+  coordinates
+});
+
+export const makeApiCall = (lat, lon) => {
   return dispatch => {
     dispatch(requestWeather);
-    return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=45.5051&lon=-122.6750&units=imperial&exclude=hourly,minutely,weather&appid=${process.env.REACT_APP_API_KEY}`)
+    return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,minutely,weather&appid=${process.env.REACT_APP_API_KEY}`)
       .then(response => response.json())
       .then(
         (jsonifiedResponse) => {
@@ -26,5 +31,7 @@ export const makeApiCall = () => {
       .catch((error) => {
         dispatch(getWeatherFailure(error));
       });
+
+      // fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=45.5051&lon=-122.6750&units=imperial&exclude=hourly,minutely,weather&appid=${process.env.REACT_APP_API_KEY}`)
   }
 }

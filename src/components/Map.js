@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useDispatch } from "react-redux";
+// import useStore from "../custom-hooks/useStore";
+import * as c from "../actions/ActionTypes";
+import * as a from "../actions/";
+
 
 const MapContainer = () => {
+  const dispatch = useDispatch();
   const [currentPosition, setCurrentPosition] = useState({});
+  // const [storePosition, dispatch ] = useStore(currentPosition);
   const mapStyles = {
     height: "50vh",
     width: "50%"
@@ -18,13 +25,20 @@ const MapContainer = () => {
     const lat = e.latLng.lat();
     const lng = e.latLng.lng();
     setCurrentPosition({ lat, lng })
+    dispatch({type: c.ADD_COORDINATES, coordinates: currentPosition})
+    
   }
+  
+
   function defaultCenter() {
-    console.log("currentPosition", currentPosition);
+    // console.log("currentPosition", currentPosition);
     if (Object.keys(currentPosition).length === 0) {
-      return setCurrentPosition({ lat: 45.5051, lng: -122.6750 });
+      setCurrentPosition({ lat: 45.5051, lng: -122.6750 });
+      dispatch({type: c.ADD_COORDINATES, coordinates: currentPosition});
+      return currentPosition;
     } else {
-      return currentPosition
+      dispatch({type: c.ADD_COORDINATES, coordinates: currentPosition});
+      return currentPosition;
     }
   }
   // const onSelect = item => {
@@ -33,7 +47,7 @@ const MapContainer = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(success);
   })
-  console.log("defaultCenter", defaultCenter());
+  // console.log("defaultCenter", defaultCenter());
   return (
     <LoadScript
       googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}>

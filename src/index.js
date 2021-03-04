@@ -8,8 +8,15 @@ import middlewareLogger from './middleware/middleware-logger';
 import reducer from './reducers/weather-reducer';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import { makeApiCall } from './actions';
+
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, middlewareLogger));
+// const store = createStore(reducer);
+const unsubscribe = store.subscribe(() => 
+  console.log("Subscription", store)
+  // makeApiCall(store.coordinates.lat, store.coordinates.lng)
+);
 
 ReactDOM.render(
   <Provider store={store}>
